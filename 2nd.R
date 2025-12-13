@@ -1,8 +1,27 @@
-tips <- read.csv("C:/Users/mvluc/Downloads/simranpython/tips.csv", stringsAsFactors=TRUE)
-View(tips)
-lm(tip~size)
-attach(tips)
+library(dplyr)
 
-temp <- read.csv("~/temp.txt", stringsAsFactors=TRUE)
-lm(ID ~ Pressure)
-attach(temp)
+data2 <- read.csv("Amazon.csv")
+
+head(data2, 10)
+
+# -----------------------------------
+# Frequency tables using table()
+# -----------------------------------
+
+# Frequency of Category
+table(data2$Category)
+
+# Frequency of Brand
+table(data2$Brand)
+
+# Frequency of PaymentMethod
+table(data2$PaymentMethod)
+
+# -----------------------------------
+# Frequency tables using count()
+# -----------------------------------
+
+count(data2, Category)
+count(data2, Brand)
+count(data2, PaymentMethod)
+print("simran s113")
