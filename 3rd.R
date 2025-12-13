@@ -1,23 +1,15 @@
-install.packages(c("readr", "psych"))
-library(readr)
-library(psych)
+data3 <- read.csv("Instagram_Analytics.csv")
+
+head(data3)
 
 
-my_data <- read.csv("C:/Users/mvluc/Downloads/simranpython/tips.csv")
+# Two-way table: media_type × traffic_source
 
+table(data3$media_type, data3$traffic_source)
 
-head(my_data)
-tail(my_data)
+# Two-way table: media_type × content_category
 
+table(data3$media_type, data3$content_category)
 
-cat("Dimensions (Rows, Columns): ", paste(dim(my_data), collapse = ", "), "\n")
-
-
-str(my_data)
-
-summary(my_data)
-
-cat("Column Names: ", paste(names(my_data), collapse = ", "), "\n")
-
-describe(my_data)
-
+# Optional: Add margins (totals) to a two-way table
+addmargins(table(data3$media_type, data3$traffic_source))
