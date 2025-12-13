@@ -1,16 +1,23 @@
-library(dplyr)
-library(readr)
+# Step 1: Read CSV
+crime_data <- read.csv("crime.csv/crime.csv")
 
-df <- read_csv("C:/Users/mvluc/Downloads/simranpython/winequality-red.csv")
+# Step 2: View dataset
+head(crime_data)
 
-sorted_alcohol <- df |> arrange(alcohol)
-head(sorted_alcohol, 5)
+# Step 3: Reshape data to get 'Before' and 'After' X values per NEIGHBOURHOOD
+library(tidyr)
+paired_data <- pivot_wider(crime_data, 
+                           id_cols = NEIGHBOURHOOD, 
+                           names_from = DAY, 
+                           values_from = X,
+                           names_prefix = "Day_")
 
-sorted_quality <- df |> arrange(desc(quality))
-head(sorted_quality, 5)
+# Step 4: View reshaped paired data
+print(paired_data)
 
-multi_sort <- df |> arrange(`fixed acidity`, desc(`residual sugar`))
-head(multi_sort, 10)
+# Step 5: Perform paired t-test
+# Compare X values from Day 1 vs Day 2
+paired_t_test <- t.test(paired_data$Day_1, paired_data$Day_2, paired = TRUE)
 
-high_alcohol <- df |> filter(alcohol > 12) |> arrange(desc(quality))
-print(high_alcohol |> select(alcohol, quality, `residual sugar`) |> head(5))
+# Step 6: View result
+print(paired_t_test)
