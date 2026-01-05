@@ -3,18 +3,16 @@ library(dplyr)
 library(stringr)
 library(tidyr)
 
-# Load CSV dataset
 diabetes_df <- read.csv("C:/Users/mvluc/Downloads/diabetes.csv", 
                         na.strings = c("", "NA"))
 
-# Create a synthetic Patient_Code for text manipulation
 diabetes_df <- diabetes_df %>%
   mutate(Patient_Code = paste0("PT-", 1000 + row_number(), "-2023"))
 
 print("--- Original Dataset ---")
 print(head(diabetes_df))
 
-# Using str_sub()
+
 diabetes_df <- diabetes_df %>%
   mutate(
     Code_Prefix = str_sub(Patient_Code, 1, 2),
@@ -36,9 +34,10 @@ diabetes_df <- diabetes_df %>%
 print("--- Data after str_split() ---")
 print(diabetes_df %>% select(Patient_Code, Prefix, ID, Mfg_Year))
 
-# Using separate() from tidyr
+
 diabetes_df <- diabetes_df %>%
   separate(Patient_Code, into = c("Dept", "Patient_ID", "Year"), sep = "-")
 
 print("--- Data after separate() ---")
 print(diabetes_df %>% select(Dept, Patient_ID, Year))
+
