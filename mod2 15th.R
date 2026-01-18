@@ -24,7 +24,7 @@ write_xlsx(
     "cat" = data,
     "Summary" = summary_data
   ),
-  "student_results.xlsx"
+  "cat_results.xlsx"
 )
 
 pdf("cat_results.pdf")
@@ -34,3 +34,4 @@ dev.off()
 pdf("cat_results_table.pdf")
 grid.table(data)
 dev.off()
+
