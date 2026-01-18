@@ -35,3 +35,4 @@ pdf("cat_results_table.pdf")
 grid.table(data)
 dev.off()
 
+
